@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'adminpannel',
+    'customer',
+    'customerapi',
 ]
 
 MIDDLEWARE = [
@@ -120,11 +123,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-# The absolute path to the directory where collectstatic will collect static files for deployment.
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# The URL to use when referring to static files (where they will be served from)
 STATIC_URL = '/static/'
+
+# Add these new lines
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -141,3 +147,12 @@ EMAIL_HOST = 'smtp.mailtrap.io'
 EMAIL_HOST_USER = 'e2cfb4099f1eee'
 EMAIL_HOST_PASSWORD = '95404a6ff11113'
 EMAIL_PORT = '2525'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAuthenticated', )
+}
