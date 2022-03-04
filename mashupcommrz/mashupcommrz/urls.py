@@ -21,6 +21,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('adminpannel/', include('adminpannel.urls')),
+    path('', RedirectView.as_view(url='adminpannel/'))
     path('customer/', include('customer.urls')),
     path('customerapi/', include('customerapi.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
